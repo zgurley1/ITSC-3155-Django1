@@ -15,8 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+
+
+
+#path home has no specified path, home is the function that is being called
+#path room has the specified path parameter and then calls the room function
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('base.urls')),
 ]
