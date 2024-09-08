@@ -21,6 +21,11 @@ class Room(models.Model):
     #auto now add only takes the timestamp when the initial instance is created
     created = models.DateField(auto_now_add=True)
 
+
+    class Meta:
+        #the dash means the newest items are first
+        ordering = ['-updated', '-created']
+
     def __str__(self):
         return str(self.name)
     
