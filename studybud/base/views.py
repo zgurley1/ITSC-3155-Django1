@@ -38,6 +38,10 @@ def loginPage(request):
     context = {}
     return render(request, 'base/login_register.html', context)
 
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+
 # Create your views here.
 #create a view
 def home(request):
