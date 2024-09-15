@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 
@@ -15,11 +16,11 @@ class Room(models.Model):
     name = models.CharField(max_length=200)
     #setting null to true means that the field is allowed to be blank, allowing for updating later
     description = models.TextField(null=True, blank=True)
-    #participants =
+    participants = models.ManyToManyField(User, related_name='participants', blank=True)
     #Everytime the save method is called it saves a timestamp
     updated = models.DateTimeField(auto_now=True)
     #auto now add only takes the timestamp when the initial instance is created
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
 
     class Meta:
@@ -36,7 +37,7 @@ class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.body[0:50]
